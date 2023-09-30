@@ -1,0 +1,10 @@
+mongoengine
+mongomock
+sanic
+requests
+python-libnmap==0.7.0
+pytz
+netifaces
+apscheduler
+blinker
+redis

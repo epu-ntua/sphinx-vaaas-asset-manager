@@ -1,0 +1,16 @@
+{
+  "DB_DEV": {
+    "host": "127.0.0.1",
+    "port": "27017",
+    "user": "yannis",
+    "password": "yannis",
+    "database": "vaaas"
+  },
+  "DB": {
+    "host": "127.0.0.1",
+    "port": "27017",
+    "user": "vaaas",
+    "password": "vaaas",
+    "database": "vaaas"
+  }
+}

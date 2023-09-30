@@ -1,0 +1,226 @@
+openapi: 3.0.1
+info:
+  title: Asset Manager
+  description: API description for Asset Manager module.
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:8000/'
+    description: development version
+
+
+paths:
+  /entities:
+    get:
+      summary: Returns a list of entities.
+      parameters:
+        - in: query
+          name: first
+          required: false
+          description: The number of the results page
+          schema:
+            type: string
+            example: '1'
+        - in: query
+          name: rows
+          required: false
+          description: The number of results per page
+          schema:
+            type: string
+            example: '100'
+        - in: query
+          name: sort
+          required: false
+          description: Sorting paramater
+          schema:
+            type: string
+            example: 'name'
+      description: Returns a JSON list of entities 
+      responses:
+        '200':
+          description: All entities data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+        '405':
+          description: METHOD NOT ALLOWED
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+    post:
+      summary: Store a new entity
+      requestBody:
+        description: A JSON object containing pet information
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/task_base'
+      responses:
+        '200':
+          description: All entity data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+        '405':
+          description: METHOD NOT ALLOWED
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+
+  /entities/{entity_id}:
+    get:
+      summary: Get a specific entity based on the entity ID
+      parameters:
+        - in: path
+          name: entity_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+        '405':
+          description: METHOD NOT ALLOWED
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+    delete:
+      summary: Delete a specific entity based on the entity ID
+      parameters:
+        - in: path
+          name: entity_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+        '405':
+          description: METHOD NOT ALLOWED
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+    put:
+      summary: Update a specific entity based on entity ID
+      parameters:
+        - in: path
+          name: entity_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'
+        '405':
+          description: METHOD NOT ALLOWED
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/base_response'              
+
+  
+
+components:
+  schemas:
+    base_response:
+      type: object
+      properties:
+        page:
+          type: string
+          description: Current page of results
+        page_size:
+          type: string
+          description: page size of results
+        status_code:
+          type: string
+          description: response status code
+        result:
+          type: string
+          description: Verbal result response message
+        more:
+          type: string
+          description: More detailed verbal result response message
+        items:
+          type: object
+          description: an array of returned JSON objects
+    entities_base:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        description:
+          type: string
+          required: false
+        assetType:
+          type: string
+          required: false
+        assessed:
+          type: string
+          required: false
+        cvss:
+          type: float
+          required: false
+        status:
+          type: boolean
+          required: false
+        sensitivity:
+          type: integer
+          required: false
+        location:
+          type: string
+          required: false
+        owner:
+          type: string
+          required: false
+        backupLocation:
+          type: string
+          required: false
+        dependedServices:
+          type: string
+          required: false
+        assetValue:
+          type: integer
+          required: false
+        ip:
+          type: string
+          required: true
+        mac:
+          type: string
+          required: true
